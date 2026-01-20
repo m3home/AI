@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QTX 光谱反射色彩计算与可视化</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>QTX 光谱反射色彩计算与可视化</h1>
+      <p>
+        上传 QTX 光谱反射数据或直接粘贴文本，系统将按照 D65 光源与 CIE 1931 2° 标准观测者
+        进行 XYZ / Lab / sRGB 计算，并可视化反射曲线。
+      </p>
+    </header>
+
+    <section class="panel">
+      <div class="controls">
+        <label class="file-input">
+          <input type="file" id="fileInput" accept=".qtx,.txt" />
+          选择 QTX 文件
+        </label>
+        <button id="sampleButton" type="button">加载示例数据</button>
+        <button id="computeButton" type="button" class="primary">计算色彩</button>
+      </div>
+      <div class="grid">
+        <div>
+          <h2>光谱反射数据</h2>
+          <textarea id="dataInput" placeholder="示例格式：\n400 5.2\n405 6.0\n...\n每行: 波长 反射率(%)"></textarea>
+          <p class="hint">支持以空格或制表符分隔的两列数据，反射率可以为 0-1 或 0-100。</p>
+        </div>
+        <div>
+          <h2>反射率曲线</h2>
+          <canvas id="spectrumCanvas" width="540" height="320"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel results">
+      <h2>计算结果</h2>
+      <div class="result-grid">
+        <div class="swatch">
+          <div id="colorSwatch" class="swatch-box"></div>
+          <div class="swatch-meta">
+            <p id="srgbText">sRGB: -</p>
+            <p id="hexText">HEX: -</p>
+          </div>
+        </div>
+        <div class="metrics">
+          <div>
+            <h3>XYZ</h3>
+            <p id="xyzText">-</p>
+          </div>
+          <div>
+            <h3>xyY</h3>
+            <p id="xyyText">-</p>
+          </div>
+          <div>
+            <h3>Lab</h3>
+            <p id="labText">-</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
